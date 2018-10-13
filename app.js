@@ -8,6 +8,7 @@ var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 
 var app = express();
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,5 +38,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var { translate } = require('./utils/translate');
+translate({ msg: 'big cat', language: 'es' });
 
 module.exports = app;
