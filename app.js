@@ -14,4 +14,8 @@ app.use(cookieParser())
 
 app.use('/', indexRouter)
 
+app.listen(3000, () => {
+    console.log('listening on port')
+})
+
 module.exports = app

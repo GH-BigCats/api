@@ -29,7 +29,7 @@ const message = (text, context) => {
 // Note how the context is passed:
 // In the first message the context is undefined. The service starts a new conversation.
 // The context returned from the first call is passed in the second request - to continue the conversation.
-exports.message = (msg) => message(msg, undefined)
+exports.watsonConversation = (msg) => message(msg, undefined)
   .then(response1 => {
     // APPLICATION-SPECIFIC CODE TO PROCESS THE DATA
     // FROM CONVERSATION SERVICE
