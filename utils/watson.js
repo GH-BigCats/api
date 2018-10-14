@@ -29,7 +29,7 @@ const message = (text, from) => {
     })
 }
 
-exports.watsonConversation = (msg, from) => message(msg, from)
+exports.watsonConversation = (msg, from, detectedLang, body) => message(msg, from)
     .then(response => {
     console.log(JSON.stringify(response, null, 2))
 
@@ -52,8 +52,17 @@ exports.watsonConversation = (msg, from) => message(msg, from)
     }
     console.log(sessions)
 
+    const beauObject = {
+        intent: response.intents.length ? response.intents[0].intent : undefined,
+        language: detectedLang,
+        from,
+        originalMessage: body,
+        translation: msg,
+        answer: response.output.text[0]
+    }
+
     // POST watson object to beau's db
-    axios.post('https://dx6yordlfj.execute-api.us-east-2.amazonaws.com/prod/save', JSON.stringify(response)).catch(err => console.log('beau\'s error', err))
+    axios.post('https://dx6yordlfj.execute-api.us-east-2.amazonaws.com/prod/save', JSON.stringify(beauObject)).catch(err => console.log('beau\'s error', err))
 
     return response.output.text[0]
   })
