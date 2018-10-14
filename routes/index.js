@@ -7,6 +7,7 @@ let detectedLang
 
 exports.message = (req, res) => {
     const { Body, From } = req.body
+    const replyFrom = From.includes('whatsapp:') ? 'whatsapp:+14155238886' : '+14159802287'
 
     translate(Body)
         .then(result => {
@@ -23,7 +24,7 @@ exports.message = (req, res) => {
         .then(translatedAnswer => {
             twilio.messages.create({
                body: translatedAnswer,
-               from: '+14159802287',
+               from: replyFrom,
                to: From
             })
             return res.end()

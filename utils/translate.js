@@ -7,11 +7,9 @@ exports.translate = (msg, language) => {
     let detectedLang
 
     if (language) {
-        console.log('language', language)
         return translator.translate(msg, language)
             .then(results => {
                 const translation = results[0]
-                console.log('results', results)
                 return translation
             })
             .catch(err => console.log(err))
@@ -24,7 +22,6 @@ exports.translate = (msg, language) => {
         })
         .then(results => {
             const translation = results[0]
-            console.log('results', results)
             return { translation, detectedLang }
         })
         .catch(err => console.log(err))

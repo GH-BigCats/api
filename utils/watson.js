@@ -1,6 +1,7 @@
 const ConversationV1 = require('watson-developer-cloud/conversation/v1')
 const axios = require('axios')
 
+const conversations = []
 const conversation = new ConversationV1({
   username: process.env.CONVERSATION_USERNAME,
   password: process.env.CONVERSATION_PASSWORD,
@@ -15,9 +16,10 @@ const message = (text, context) => {
         },
         context
     }
+    console.log(conversation)
 
     return new Promise((resolve, reject) => {
-        return conversation.message(payload, function(err, data) {
+        return conversation.message(payload, (err, data) => {
             if (err) {
                 reject(err)
             } else {
@@ -27,7 +29,7 @@ const message = (text, context) => {
     })
 }
 
-exports.watsonConversation = (msg) => message(msg, undefined)
+exports.watsonConversation = (msg) => message(msg)
   .then(response => {
     console.log(JSON.stringify(response, null, 2))
 
