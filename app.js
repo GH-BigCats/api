@@ -1,18 +1,20 @@
 require('dotenv').config()
-var createError = require('http-errors')
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-var indexRouter = require('./routes')
-var app = express()
+const createError = require('http-errors')
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const indexRouter = require('./routes')
+const app = express()
+const routes = require('./routes')
 
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/', indexRouter)
+app.post('/', routes.message)
+app.get('/', routes.translate)
 
 app.listen(3000, () => {
     console.log('listening on port')
