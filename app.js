@@ -19,5 +19,3 @@ app.get('/', routes.translate)
 app.listen(3000, () => {
     console.log('listening on port')
 })
-
-module.exports = app

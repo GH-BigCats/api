@@ -15,7 +15,7 @@ exports.message = (req, res) => {
             return result.translation
         })
         .then(msg => {
-            return watsonConversation(msg)
+            return watsonConversation(msg, From)
         })
         .then(answer => {
             if (detectedLang === 'und') return answer
